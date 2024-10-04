@@ -2,7 +2,7 @@ import React from 'react';
 
 const VideoCard = ({info}) => {
 
-    console.log(info)
+
 
     const { snippet} = info;
     const {publishedAt ,title ,channelTitle, thumbnails } = snippet;
