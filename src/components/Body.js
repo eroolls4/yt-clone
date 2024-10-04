@@ -7,7 +7,7 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../utils/firebase";
 import {addUser, removeUser} from "../utils/userSlice";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -21,9 +21,9 @@ const Body = () => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/auth.user
-                const {uid, email, displayName,photoURL} = user;
+                const {uid, email, displayName, photoURL} = user;
 
-                dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL : photoURL}));
+                dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL}));
                 toast.success("welcome back " + user.email)
                 navigate("/browse");
                 // ...
@@ -46,7 +46,7 @@ const Body = () => {
                 <Head/>
                 <div className="flex">
                     <Sidebar/>
-                    <MainContainer/>
+                    <Outlet/>
                 </div>
             </div>
         </div>
