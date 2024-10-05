@@ -96,8 +96,8 @@ const Comment = ({data}) => {
 }
 
 const CommentList = ({listOfComments}) => {
-    return listOfComments.map( (comment) =>
-        <div>
+    return listOfComments.map( (comment,index) =>
+        <div key={index}>
             <Comment data={comment} />
             <div className="ml-4 bg-amber-400">
                  <CommentList listOfComments={comment.replies} />

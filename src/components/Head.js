@@ -11,6 +11,10 @@ const Head = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [suggestion, setSuggestion] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false)
+    const distpatch = useDispatch();
+    const navigate = useNavigate();
+
+    const isUserLoggedIn = auth.currentUser;
 
     const searchCache = useSelector((store) => store.search )
 
@@ -59,10 +63,7 @@ const Head = () => {
         }))
     }
 
-    const distpatch = useDispatch();
-    const navigate = useNavigate();
 
-    const isUserLoggedIn = auth.currentUser;
     console.log(isUserLoggedIn)
 
     const toggleMenuHandler = () => {
@@ -87,7 +88,7 @@ const Head = () => {
     }
 
     return (
-        <div className="grid grid-flow-col p-5 m-2 shadow-lg">
+        <div className="grid grid-flow-col p-5 m-2 shadow-lg items-center">
             <div className="flex col-span-1">
                 <img onClick={() => toggleMenuHandler()}
                      alt="menu"
@@ -125,15 +126,15 @@ const Head = () => {
                 {/*     className="h-8"*/}
                 {/*     src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"*/}
                 {/*/>*/}
-                {isUserLoggedIn ? <div className="flex">
+                {isUserLoggedIn ? <div className="flex items-center">
                         <img alt="user"
                              className="h-10 rounded-full"
                              src={isUserLoggedIn.photoURL}
                         />
-                        <p className="px-4 cursor-pointer" onClick={handleSignOut}>Sign out</p>
+                        <button className="bg-blue-300 m-2 p-2 rounded-full" onClick={handleSignOut}>Sign out</button>
                     </div>
                     :
-                    <p className="cursor-pointer" onClick={handleSignIn}>Sign in</p>}
+                    <button  className="bg-blue-300 m-2 p-2 rounded-full" onClick={handleSignIn}>Sign in</button>}
             </div>
         </div>
     );

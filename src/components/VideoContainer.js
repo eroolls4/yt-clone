@@ -37,7 +37,7 @@ const VideoContainer = () => {
 
 
             {videos.map((video) => (
-                <Link key={video.id.videoId}  to={"/browse/watch?v=" + video.id.videoId }>
+                <Link key={video.id.videoId + crypto.randomUUID() }  to={"/browse/watch?v=" + video.id.videoId }>
                     <VideoCard  info={video} />
                 </Link>
 
