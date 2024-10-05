@@ -95,7 +95,7 @@ const Head = () => {
                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png"
                 />
                 <img alt="yt-logo"
-                     className="h-10 mx-4"
+                     className="h-10 mx-4 cursor-pointer"
                      onClick={handleRoute}
                      src="https://cdn.mos.cms.futurecdn.net/8gzcr6RpGStvZFA2qRt4v6.jpg"
                 />
