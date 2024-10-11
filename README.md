@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# YouTube Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern YouTube-like web application built with React and Redux, featuring video search, live chat with API polling, n-level deep comments, and infinite scrolling for video loading. The app utilizes Firebase for authentication and integrates modern techniques like search debouncing and caching for an optimized user experience.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Firebase Authentication**: Secure user login and registration using Firebase Auth.
+- **Live Chat**: Real-time chat powered by API polling, with automated random message generation every 2 seconds.
+- **N-level Deep Comments**: Allows for deeply nested comments to simulate real-world discussions.
+- **Search Functionality**: Modern search implementation with debouncing and caching, ensuring fast and efficient search results without redundant API calls.
+- **Infinite Scroll**: Automatically loads more videos as the user scrolls down the page, providing a seamless browsing experience.
+- **React Router**: SPA navigation for a smooth and fast browsing experience.
+- **Redux**: Global state management, including storing search results and chat messages for efficient data handling.
 
-### `npm start`
+## Installation and Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. Clone the Repository
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+git clone https://github.com/eroolls4/yt-clone.git
+```
+### 2. Install Dependencies
+Navigate to the project directory and install the necessary dependencies:
 
-### `npm test`
+```bash
+cd yt-clone
+npm install
+```
+### 3. Set Up Environment Variables
+Create a .env file in the root directory of the project and add the following environment variables:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* REACT_APP_YT_KEY: Your YouTube API key for fetching video data.
+* REACT_APP_SEARCH_SUGGEST_API: API endpoint for fetching search suggestions.
 
-### `npm run build`
+ Firebase configuration:
+* REACT_APP_FIREBASE_API_KEY
+* REACT_APP_FIREBASE_AUTH_DOMAIN
+* REACT_APP_FIREBASE_PROJECT_ID
+* REACT_APP_FIREBASE_STORAGE_BUCKET
+* REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+* REACT_APP_FIREBASE_APP_ID
+* REACT_APP_FIREBASE_MEASUREMENT_ID
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 4.Run the Application
+Once the environment variables are set, start the application in development mode:
+```bash
+npm start
+```
+The app will be available at http://localhost:3000.
