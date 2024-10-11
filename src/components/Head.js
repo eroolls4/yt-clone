@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {toggleMenu} from "../utils/appSlice";
+import {toggleMenu} from "../utils/redux/appSlice";
 import {useNavigate} from "react-router-dom";
 
 import {signOut} from "firebase/auth";
 import {auth} from "../utils/firebase";
-import {cacheResults} from "../utils/searchSlice";
+import {cacheResults} from "../utils/redux/searchSlice";
 
 const Head = () => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -50,22 +50,14 @@ const Head = () => {
 
     const getSearchSuggestions = async () => {
         const API = 'http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=' + searchQuery;
-
-
         const data = await fetch(API);
         const json = await data.json();
 
-        console.log(json[1]);
         setSuggestion(json[1]);
-
         distpatch(cacheResults({
             [searchQuery] : json[1]
         }))
     }
-
-
-    console.log(isUserLoggedIn)
-
     const toggleMenuHandler = () => {
         distpatch(toggleMenu());
     }
@@ -75,13 +67,13 @@ const Head = () => {
     }
 
     const handleSignIn = () => {
-        navigate("/")
+        navigate("/login")
     }
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-            navigate("/")
+            navigate("/login")
         }).catch((error) => {
             // An error happened.
         });
@@ -122,10 +114,6 @@ const Head = () => {
             </div>
 
             <div className="col-span-1">
-                {/*<img alt="user"*/}
-                {/*     className="h-8"*/}
-                {/*     src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"*/}
-                {/*/>*/}
                 {isUserLoggedIn ? <div className="flex items-center">
                         <img alt="user"
                              className="h-10 rounded-full"

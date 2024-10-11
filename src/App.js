@@ -2,7 +2,7 @@ import './App.css';
 import Head from "./components/Head";
 import Body from "./components/Body";
 import {Provider} from "react-redux";
-import store from "./utils/store";
+import store from "./utils/redux/store";
 import {createBrowserRouter} from "react-router-dom";
 import Login from "./components/Login";
 import {RouterProvider} from "react-router-dom";
@@ -13,7 +13,7 @@ function App() {
 
     const appRouter=createBrowserRouter([
         {
-            path : "/",
+            path : "/login",
             element : <Login />
         },
         {

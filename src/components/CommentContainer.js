@@ -73,7 +73,6 @@ const commentsDummyData = [
     },
 ];
 
-
 const Comment = ({data}) => {
     const {name, text, replies} = data;
 

@@ -3,9 +3,9 @@ import {Link, useNavigate} from "react-router-dom";
 import {checkValidData} from "../utils/validateForm";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
-import {  updateProfile,signInWithEmailAndPassword , createUserWithEmailAndPassword } from "firebase/auth";
+import {updateProfile, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../utils/firebase";
-import {addUser} from "../utils/userSlice";
+import {addUser} from "../utils/redux/userSlice";
 import {useDispatch} from "react-redux";
 
 const Login = () => {
@@ -13,27 +13,21 @@ const Login = () => {
 
     const email = useRef(null);
     const password = useRef(null);
-    const name=useRef(null);
-    const dispatch=useDispatch();
-    const navigate=useNavigate();
+    const name = useRef(null);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSignInForm = () => {
         setIsSignInForm(!isSignInForm);
     }
 
     const handleButtonClick = () => {
-        // const msg = checkValidData(email.current.value, password.current.value,name.current.value);
-        // if(msg){
-        //     toast.error(msg);
-        //     return;
-        // }
-        if(!isSignInForm){  //sign up
-            const msg = checkValidData(email.current.value, password.current.value,name.current.value);
-            if(msg){
+        if (!isSignInForm) {  //sign up
+            const msg = checkValidData(email.current.value, password.current.value, name.current.value);
+            if (msg) {
                 toast.error(msg);
                 return;
             }
-
             createUserWithEmailAndPassword(
                 auth,
                 email.current.value,
@@ -46,7 +40,7 @@ const Login = () => {
                         photoURL: "https://img.freepik.com/premium-photo/3d-style-avatar-profile-picture-featuring-male-character-generative-ai_739548-13626.jpg",
                     })
                         .then(() => {
-                            const { uid, email, displayName, photoURL } = auth.currentUser;
+                            const {uid, email, displayName, photoURL} = auth.currentUser;
                             dispatch(
                                 addUser({
                                     uid: uid,
@@ -55,7 +49,8 @@ const Login = () => {
                                     photoURL: photoURL,
                                 })
                             );
-                          toast.success("Successfully registred account")
+                            toast.success("Successfully registred account")
+                            setTimeout(() => navigate("/browse"), 2000);
                         })
                         .catch((error) => {
                             toast.error(error.message)
@@ -67,19 +62,17 @@ const Login = () => {
                     toast.error(errorCode + "-" + errorMessage);
                 });
 
-        }else{ //sign in
+        } else { //sign in
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     // Signed in
                     const user = userCredential.user;
-
-                    const {uid,email,displayName} = user;
-                    dispatch(addUser({uid : uid , email : email , displayName : displayName , isLoggedIn : true}));
-                    // toast.success("welcome back " + user.email)
-                    // toast.success("welcome back " + user.email)
-                    navigate("/browse");
-                    // toast.success("welcome back " + user.email)
-                    // ...
+                    const {uid, email, displayName} = user;
+                    dispatch(addUser({uid: uid, email: email, displayName: displayName, isLoggedIn: true}));
+                    toast.success("welcome back " + user.email)
+                    setTimeout(() => {
+                        navigate("/browse");
+                    }, 1000);  // 500 milliseconds delay
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -88,12 +81,11 @@ const Login = () => {
                 });
         }
 
-
     }
 
     return (
         <div>
-            <ToastContainer />
+            <ToastContainer/>
             <div className="flex h-screen w-screen justify-center items-center bg-gray-200">
                 <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
                     <h2 className="text-lg font-semibold mb-4">{isSignInForm ? "Hiii, please login to your Account" : "Welcome to registration"}</h2>
