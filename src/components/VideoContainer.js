@@ -7,7 +7,18 @@ const VideoContainer = () => {
 
     useEffect(() => {
         fetchVideos();
+
+        window.addEventListener("scroll" ,handleScroll);
+
+        return () => window.removeEventListener("scroll",handleScroll)
     }, []);
+
+
+    const handleScroll = () => {
+        if(window.scrollY + window.innerHeight >= document.body.scrollHeight){
+            fetchVideos();
+        }
+    }
 
     const fetchVideos = async () => {
 
@@ -17,7 +28,7 @@ const VideoContainer = () => {
         const json = await data.json()
 
         // console.log(json)
-        setVideos(json.items)
+        setVideos((v) =>  [...v,...json.items])
     }
 
 
@@ -26,8 +37,8 @@ const VideoContainer = () => {
 
 
             {videos.map((video) => (
-                <Link to={"/browse/watch?v=" + video.id.videoId }>
-                    <VideoCard key={video.id.videoId} info={video} />
+                <Link key={video.id.videoId + crypto.randomUUID() }  to={"/browse/watch?v=" + video.id.videoId }>
+                    <VideoCard  info={video} />
                 </Link>
 
             ))};

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Sidebar from "./Sidebar";
 import MainContainer from "./MainContainer";
 import Login from "./Login";
@@ -15,6 +15,8 @@ const Body = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
+
     useEffect(() => {
         console.log("useEffecttt before authchnged is called")
         onAuthStateChanged(auth, (user) => {
@@ -24,7 +26,7 @@ const Body = () => {
                 const {uid, email, displayName, photoURL} = user;
 
                 dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL}));
-                toast.success("welcome back " + user.email)
+                 toast.success("welcome back " + user.email)
                 navigate("/browse");
                 // ...
             } else {

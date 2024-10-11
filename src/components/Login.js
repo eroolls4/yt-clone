@@ -22,18 +22,18 @@ const Login = () => {
     }
 
     const handleButtonClick = () => {
-        console.log(email.current.value)
-        console.log(password.current.value)
-
-        const msg = checkValidData(email.current.value, password.current.value);
-        console.log(msg)
-
-        if(msg){
-            toast.error(msg);
-            return;
-        }
-
+        // const msg = checkValidData(email.current.value, password.current.value,name.current.value);
+        // if(msg){
+        //     toast.error(msg);
+        //     return;
+        // }
         if(!isSignInForm){  //sign up
+            const msg = checkValidData(email.current.value, password.current.value,name.current.value);
+            if(msg){
+                toast.error(msg);
+                return;
+            }
+
             createUserWithEmailAndPassword(
                 auth,
                 email.current.value,
@@ -55,6 +55,7 @@ const Login = () => {
                                     photoURL: photoURL,
                                 })
                             );
+                          toast.success("Successfully registred account")
                         })
                         .catch((error) => {
                             toast.error(error.message)
@@ -75,6 +76,7 @@ const Login = () => {
                     const {uid,email,displayName} = user;
                     dispatch(addUser({uid : uid , email : email , displayName : displayName , isLoggedIn : true}));
                     // toast.success("welcome back " + user.email)
+                    // toast.success("welcome back " + user.email)
                     navigate("/browse");
                     // toast.success("welcome back " + user.email)
                     // ...
@@ -91,6 +93,7 @@ const Login = () => {
 
     return (
         <div>
+            <ToastContainer />
             <div className="flex h-screen w-screen justify-center items-center bg-gray-200">
                 <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
                     <h2 className="text-lg font-semibold mb-4">{isSignInForm ? "Hiii, please login to your Account" : "Welcome to registration"}</h2>
@@ -141,7 +144,6 @@ const Login = () => {
 
                 </div>
             </div>
-            <ToastContainer></ToastContainer>
         </div>
     );
 }
